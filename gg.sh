@@ -1,21 +1,27 @@
 #!/bin/bash
 
-# Define the version variable
-old_version="1.4"
-version="1.4"
-LC_CTYPE=C find . -maxdepth 3 -type f -exec perl -pi -e "s/$old_version/$version/g" {} +
+# Define version variables
+old_version="1.0.0"
+version="1.0.0"  # <-- bump this when needed
 
+# Replace version strings, but exclude .git folder
+LC_CTYPE=C find . -maxdepth 3 -type f -not -path "./.git/*" \
+  -exec perl -pi -e "s/$old_version/$version/g" {} +
+
+# Git config (only once per system, not needed every run normally)
 git config --global user.name "Kamran"
-git config --global user.email kamranmuazzam@gmail.com
+git config --global user.email "kamranmuazzam@gmail.com"
 
-git pull
+# Sync with remote repo
+git pull --rebase origin main
+
+# Commit and push version bump
 git add --all
-git commit -m "$version"
-git push -u origin main
-# git push origin main --force
-gh release create v$version --title "Version $version" --notes "releasing $version, kudos"
-gh release edit v$version --draft=false
+git commit -m "Bump version to $version"
+git push origin main
 
-
-# git tag v1.4
-# git push origin v1.4
+# Create GitHub release
+gh release create "v$version" \
+  --title "Version $version" \
+  --notes "Releasing $version 🎉" \
+  --draft=false
