@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define version variables
-old_version="1.0.0"
-version="1.0.0"  # <-- bump this when needed
+old_version="1.0.1"
+version="1.0.1"  # <-- bump this when needed
 
 # Replace version strings, but exclude .git folder
 LC_CTYPE=C find . -maxdepth 3 -type f -not -path "./.git/*" \
