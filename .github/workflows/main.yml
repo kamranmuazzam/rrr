@@ -53,7 +53,7 @@ jobs:
           cache: "yarn"
 
       - name: Install frontend dependencies
-        run: yarn install
+        run: yarn install --check-files --force
 
       # Generate a new signing key on every run (ephemeral)
       - name: Generate Tauri Private Key
