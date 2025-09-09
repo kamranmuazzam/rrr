@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define version variables
-old_version="1.0.1"
-version="1.0.1"  # <-- bump this when needed
+old_version="1.0.2"
+version="1.0.2"  # <-- bump this when needed
 
 # Replace version strings, but exclude .git folder
 LC_CTYPE=C find . -maxdepth 3 -type f -not -path "./.git/*" \
@@ -13,7 +13,8 @@ git config --global user.name "Kamran"
 git config --global user.email "kamranmuazzam@gmail.com"
 
 # Sync with remote repo
-git pull --rebase origin main
+git pull
+# git pull --rebase origin main
 
 # Commit and push version bump
 git add --all
